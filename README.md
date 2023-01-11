@@ -1,3 +1,2 @@
 # RepoTemplates
-
-homework assignments for CS 5008 Spring 2023
+Wenli Li - li.wenli@northeastern.edu
