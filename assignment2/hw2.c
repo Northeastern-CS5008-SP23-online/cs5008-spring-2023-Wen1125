@@ -1,33 +1,55 @@
-// name: <your name here>
-// email: <your email here>
+// name: Wenli Li
+// email: li.wenli@northeastern.edu
 
 #include <stdio.h>   // stardard input/output library
 #include <stdbool.h> // standard boolean library: bool, true, false
+#include <stdlib.h> // use malloc
 
-#define MAXSIZE 100
+#define MAXSIZE 100 // tell the preprocessor to replace MAXSIZE with 100
 
 bool isEmpty (int* s, int t) {
   // returns true if t = -1
-
+  if (t == -1) {
+    return true;
+  } else {
+    return false;
+  }
   // INSERT YOUR CODE HERE
 }
 
 bool isFull (int* s, int t) {
   // returns true if no more room in the stack
-
+  if (t >= MAXSIZE){
+    return true;
+  } else {
+    return false;
+  }
   // INSERT YOUR CODE HERE
 }
 
 void push(int v, int* s, int* tp) {
   // put v onto the top of the stack s unless it is already full
-
+  if (!isFull(s, *tp)) {
+    (*tp)++;
+    s[*tp] = v;
+  } else {
+    printf("*** Attempt to push to a full stack ***\n");
+  }
   // INSERT YOUR CODE HERE
 }
 
 int pop (int* s, int* tp) {
   // return the top entry in the stack unless stack is empty
   // update s and *tp -- requires top to be passed by reference!
-
+  int* returnval_p = (int*)malloc(sizeof(int));
+  *returnval_p = 0;
+  if (!isEmpty(s, *tp)) {
+    *returnval_p = s[*tp];
+    (*tp)--;
+  } else {
+    printf("*** Attempt to pop an empty stack ***\n");
+  }
+  return *returnval_p;
   // INSERT YOUR CODE HERE
 }
 
