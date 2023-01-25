@@ -12,13 +12,31 @@ typedef struct employee
 }employee_t;
 /* Read the employee details using scanf*/
 void readData(int n, employee_t* s)
-{
+{   
+    for (int i=0; i<n; i++) {
+        printf("Please enter employeeID, Name, Designation, Department of Employee %d:\n ", i+1);
+        scanf("%d", &(s->empId));
+        scanf("%s", s->Name);
+        scanf("%s", s->Designation);
+        scanf("%s", s->Dept);
+        printf("\n");
+        s++;
+    }
+    
     
 }
 /* Function to print the employee details*/
-void display(int n, employee_t * s)
+void display(int n, employee_t* s)
 {
-    
+    for (int i=0; i<n; i++) {
+        printf("The details of the employee %d:\n", i+1);
+        printf("empId: %d\n", s->empId);
+        printf("Name: %s\n", s->Name);
+        printf("designation: %s\n", s->Designation);
+        printf("Dept: %s\n", s->Dept);
+        printf("\n");
+        s++;
+    }
     
 }
 
@@ -26,8 +44,17 @@ void display(int n, employee_t * s)
 int main()
 
 {
+    // Get the number of employees.
+    int n;
+    printf("Enter the numebr of employees: ");
+    scanf("%d", &n);
 
-    
-
+    // Allocting memory accordingly.
+    employee_t* s = (employee_t*)malloc(3* sizeof(employee_t));
+    if (s!=NULL) {
+        readData(n, s);
+        display(n, s);
+    }
+return 0;
 }
 
