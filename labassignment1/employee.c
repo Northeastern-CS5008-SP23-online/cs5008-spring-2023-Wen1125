@@ -55,6 +55,7 @@ int main()
         readData(n, s);
         display(n, s);
     }
+    free(s);
 return 0;
 }
 
