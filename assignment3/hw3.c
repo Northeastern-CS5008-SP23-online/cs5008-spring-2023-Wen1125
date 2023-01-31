@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Wenli Li
+// email: li.wenli@northeastern.edu
 
 #include <stdio.h>   // stardard input/output library
 #include <stdbool.h> // standard boolean library: bool, true, false
@@ -95,12 +95,17 @@ void enqueue(queue_t* q_p, int d) {
 
     if (isEmpty(q_p)) {
       // queue is empty so insertion is easy
-
+      n_p = newNode(d);
+      q_p->head_p = n_p;
+      q_p->tail_p = n_p;
       // ***** INSERT YOUR CODE HERE *****
       
     } else {
       // queue is not empty
-
+      n_p = newNode(d);
+      q_p->tail_p->left_p = n_p;
+      n_p->right_p = q_p->tail_p;
+      q_p->tail_p = n_p;
       // ***** INSERT YOUR CODE HERE *****
     } 
   }
@@ -121,12 +126,14 @@ int dequeue(queue_t* q_p) {
 
       if (q_p->head_p  == q_p->tail_p) {      
 	// only one node in the queue, clear queue head and tail 
-
+        q_p->head_p = NULL;
+        q_p->tail_p = NULL;
 	// ***** INSERT YOUR CODE HERE *****
 	
       } else {
 	// mulitple nodes in queue, clean up head pointer and new head of queue
-
+        q_p->head_p = n_p->left_p;
+        q_p->head_p->right_p = NULL;
 	// ***** INSERT YOUR CODE HERE *****
 
       }
