@@ -25,7 +25,6 @@ int main()
         fgets(line, 100, fp);
         count++;
     }
-    printf("the number of elements in the array is %d\n", count);
     rewind(fp);
     
     //initialize the array

@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: <Wenli Li>
+// email: <li.wenli@northeastern.edu>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,11 +37,28 @@ void mergeIt(
 	   int leftStop,
 	   int rightStart,
 	   int rightStop) {
-  
+    char temp;
+    int loopIndex;
 
-  // ADD YOUR CODE HERE
-  
-  return;
+    while (leftStart<=rightStop && rightStart<=rightStop){
+      if (data[leftStart]<=data[rightStart]){
+        leftStart++;
+      } else {
+        // shift elements between leftStart to rightStart-1 to the right by 1
+        temp = data[rightStart];
+        loopIndex = rightStart;
+
+        while(loopIndex>leftStart) {
+          data[loopIndex] = data[loopIndex-1];
+          loopIndex--;
+        }
+        
+        data[leftStart] = temp;
+        leftStart++;
+        rightStart++;
+      }
+    }
+  return; 
 }
 
 
@@ -69,7 +86,6 @@ void msort(char* data, int left, int right) {
   }
   return;
 }
-
 
 
 int main(){

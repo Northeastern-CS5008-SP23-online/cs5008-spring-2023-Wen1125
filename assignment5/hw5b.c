@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: <Wenli Li>
+// email: <li.wenli@northeastern.edu>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,14 +31,41 @@ char upperChar(char c){
   }
 }
 
+//fuction that move smaller number to the left of the current pivot and 
+// larger number to the right and returns the index of current pivot
+int quickSort(char* data, int left, int right) {
+  int piv = left;
+  char temp;
+  int i, loopIndex;
 
+  for(i=left;i<right+1;i++){
+    if (upperChar(data[i])<upperChar(data[piv])){
+      
+      // shift elements between piv to current sorted i to the right by 1
+      temp = data[i];
+      loopIndex = i;
+      while(piv<loopIndex) {
+        data[loopIndex] = data[loopIndex-1];
+        loopIndex--;
+      }
+      data[piv] = temp;
+      piv++;
+    }
+  }
+  return piv;
+}
 
 // pick pivot and then sort small and big parts 
-void quicky(char* data, int left, int right) {
-
-  // ADD YOUR CODE HERE
-
-  return;
+void quicky(char* data, int left, int right) { 
+  if (left>=right) {
+    // base case
+    return;
+  } else {
+    // sort both side of the pivot
+    int piv = quickSort(data, left, right);
+    quicky(data, left, piv-1);
+    quicky(data, piv+1, right);
+  }
 }
 
 
