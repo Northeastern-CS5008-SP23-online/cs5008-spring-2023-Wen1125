@@ -1,5 +1,5 @@
-/*---enter your name here----*/
-/*---enter your email here-----*/
+/*---Wenli Li----*/
+/*---li.wenli@northeastern.edu-----*/
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -122,10 +122,16 @@ void freenode(node_t *p){
 /* ----------------function to insert a node*---------------------------*/
 /* Insert a node like a Binary search tree, then convert it into a AVL tree using four cases*/
 node_t* Insert(node_t* root, int data)
-{
+{   if (root==NULL) {
+    root = NewNode(data);
+} else {
+    if (data<root->data) {
+       root->left = Insert(root->left, data);
+    } else {
+       root->right = Insert(root->right, data);
+        }
+}   
 
-    
-    
     //insert your code here
 
 

@@ -291,6 +291,7 @@ void breadthFirst (tnode_t* root) {
       enqueue(myQueue, currentNode->right);
     } 
   }
+  freeQueue(myQueue);
 }
 
 // ========================== END INSERT FUNCTIONS HERE TO WALK TREE ==========================
@@ -348,8 +349,4 @@ int main() {
 
   return 0;
 }
-
-
-
-
 
