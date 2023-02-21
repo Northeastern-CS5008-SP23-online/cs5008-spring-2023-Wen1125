@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: <Wenli Li
+// email: <li.wenli@northeastern.edu>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -244,30 +244,54 @@ void freeQueue(queue_t* qp) {
 
 void preorder (tnode_t* np) {
   // INSERT YOUR CODE HERE
-
-  return;
+ if (np!=NULL) {
+    printf("%c", np->data);
+    preorder(np->left);
+    preorder(np->right);
+  } else {
+    return;
+  }
 }
 
 void inorder (tnode_t* np) {
   // INSERT YOUR CODE HERE
-  
-  return;
+  if (np==NULL) {
+    return;
+    }
+  inorder(np->left);
+  printf("%c", np->data);
+  inorder(np->right);
+    
 }
 
 void postorder (tnode_t* np) {
   // INSERT YOUR CODE HERE
-  
-  return;
+  if (np!=NULL) {
+    postorder(np->left);
+    postorder(np->right);
+    printf("%c", np->data);
+  } else {
+    return;
+  }
 }
 
 
 void breadthFirst (tnode_t* root) {
   // INSERT YOUR CODE HERE
-  
-  return;
+  tnode_t* currentNode = root;
+  queue_t* myQueue = newQueue();
+  enqueue(myQueue, root);
+  while (!isEmpty(myQueue)) {
+    currentNode = dequeue(myQueue);
+    printf("%c", currentNode->data);
+    if (currentNode->left!=NULL) {
+      enqueue(myQueue, currentNode->left);
+    }
+    if (currentNode->right!=NULL) {
+      enqueue(myQueue, currentNode->right);
+    } 
+  }
 }
-
-
 
 // ========================== END INSERT FUNCTIONS HERE TO WALK TREE ==========================
 
