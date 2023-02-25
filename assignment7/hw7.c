@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: <Wenli Li>
+// email: <li.wenli@northeastern.edu>
 
 // format of document is a bunch of data lines beginning with an integer (rank which we ignore)
 // then a ',' followed by a double-quoted string (city name)
@@ -121,21 +121,45 @@ int stateMachine(int inState, int nextChar, char* temp, char* inputLine, int* li
     break;
          
   case S4:
-
+    // accept comma 
+    if (inputLine[nextChar] == ',') {
+      state = S5;
+      //appendChar(temp, inputLine[nextChar]);
+    } else {
+      state = ERRORSTATE;
+    }
     // *** YOUR CODE GOES HERE ***
-    
     break;
          
   case S5:
-
+    // Looking for a double quote
+    if (inputLine[nextChar] == '\"') {
+      state = S6;
+    } else {
+      state = ERRORSTATE;
+    }
     // *** YOUR CODE GOES HERE ***
-    
     break;
          
   case S6:
-
+    if (inputLine[nextChar] == '\"') {
+      state = ACCEPTSTATE;
+      // Population building cmplete
+      sscanf(temp,"%d", popInt_p);
+      strcpy(temp, "");
+    } else if (inputLine[nextChar] == ',') { 
+      state = S6;
+      } 
+      else if (isDigit(inputLine[nextChar])) {
+      // Continue to build population
+      state = S6;
+      appendChar(temp,inputLine[nextChar]);
+      //printf("%s\n", temp);
+      }
+      else {
+        state = ERRORSTATE;
+      }
     // *** YOUR CODE GOES HERE ***
-    
     break;
          
   case ACCEPTSTATE:
@@ -160,7 +184,6 @@ int main () {
   int  state;                  // FSM state
   int  nextChar;               // index of next character in input string
   char temp[MAXSTRING];        // temp string to build up extracted strings from input characters
-  
  
   FILE* fp;
   fp = fopen("pop.csv","r");
@@ -169,7 +192,6 @@ int main () {
     fgets(inputLine, MAXSTRING, fp); // prime the pump for the first line
 
     while (feof(fp) == 0){
-
       nextChar = 0;
       state = STARTSTATE; 
       strcpy(temp,"");       // temp = ""
