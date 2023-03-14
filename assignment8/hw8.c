@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: <Wenli Li>
+// email: <li.wenli@northeastern.edu>
 
 // format of document is a bunch of data lines beginning with an integer (rank which we ignore)
 // then a ',' followed by a double-quoted string (city name)
@@ -65,18 +65,20 @@ int hash1(char* s) {
 // hint: use (int)s[i] to get the integer code of  character in s[i]
 int hash2(char* s) {
   int sumOfS = 0;
-
+  for (int i=0;i<strlen(s);i++) {
+    sumOfS += (int)s[i];
+  }
   //**** YOUR CODE GOES HERE ****
 
   return (sumOfS % HASHSIZE);
 }
 
-// hash 3 is the prioduct of the first two char codes of string
+// hash 3 is the product of the first two char codes of string
 int hash3(char* s) {
   long productOfS = 1;
 
   //**** YOUR CODE GOES HERE ****
-
+  productOfS = s[0] * s[1];
   return ((int)(productOfS % HASHSIZE));
 }
 
@@ -91,6 +93,14 @@ bool addToHashTable(keyvalue_t* t[], int loc, char* k, int v) {
   bool result = true;
 
   //**** YOUR CODE GOES HERE ****
+  if (loc>=0 && loc<=HASHSIZE) {
+    keyvalue_t* kv = newKeyValue(k, v);
+    kv->next = t[loc];
+    t[loc] = kv;
+  } else {
+    result = false;
+  }
+  
 
   return result;
 }
