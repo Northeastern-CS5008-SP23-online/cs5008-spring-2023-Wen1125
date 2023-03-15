@@ -1,6 +1,6 @@
 
-/*Enter your name here*/
-/* Enter your email here*/
+/*Wenli Li*/
+/* li.wenli@northeastern.edu*/
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -19,7 +19,7 @@ typedef struct node
 node_t *insert(struct node *front)
 {
 
-    node_t *p,*temp;
+    node_t *p,*temp,*c;
     char name[20],address[100];
     temp=(node_t*)malloc(sizeof(node_t));
     printf("Enter patient Name:");
@@ -33,18 +33,48 @@ node_t *insert(struct node *front)
     printf("Enter the priority:");
     scanf("%d",&(temp->priority));
     int pri=temp->priority;
-
+    // front is empty
+    if (front==NULL){
+        front = temp;
+        return front;
+    }
+    // if list is not empty and we get the higest priority
+    if (front!=NULL && temp->priority>front->priority){
+        p = front;
+        front = temp;
+        front->next = p;
+        return front;
+    } 
+    // if list is not empty and we get lower priority
+    c = front;
+    while (front!=NULL && temp->priority<=front->priority) {
+        p = front;
+        front = front->next;
+    }
+    temp->next = front;
+    p->next = temp;
+    front = c;
+    return front;
  /*insert your code here*/
-
-
 }
 
 /* Delete the node which is present at the front*/
 node_t *delete(struct node *front)
-{
-    
+{   
+    node_t* temp;
+    if (front!=NULL) {
+        printf("\nDeleted Record is : %d", front->reg);
+        printf("\nPatient's name is : %s", front->name);
+        printf("\nPatient's age : %d", front->age);
+        temp = front;
+        front = front->next;
+        free(temp);
+        return front;
+    } else {
+        printf("\nThere is no patient record.");
+        return front;
+    }
     /*Insert your code here*/
-            
 }
 
 /* To display the patients records */
