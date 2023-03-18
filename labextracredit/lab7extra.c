@@ -1,6 +1,6 @@
 /*Optional lab assignment- Extra Credit lab*/
-//enter your name here
-//enter your email here
+//Wenli Li
+//li.wenli@northeastern.edu
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -47,31 +47,40 @@ void heapify(pq*p2,int n, int i ){
     int lchild=2*i+1;/*left =2*i+1*/
     int rchild=2*i+2;/*right=2*i+2*/
     /*insert your code here*/
-    
-    
+    if (lchild<n && p2->heap[lchild].priority>=p2->heap[largest].priority) {
+        largest = lchild;
+    }
+    if (rchild<n && p2->heap[rchild].priority>=p2->heap[largest].priority) {
+       largest = rchild;
+    }
+    if (largest!=i) {
+        swap(&(p2->heap[largest]), &(p2->heap[i]));
+        heapify(p2, n, largest);
 
-
-
-    
-
+    } else {
+        return;
+    }
 }
 
 /* To shift the new node (inserted at the end) up at its appropriate position in order to satisfy the max heap property */ 
 void shiftUp(pq* p2,int i)
 {
     /*insert your code here*/
-    
-
-
-
-    
+    if (i==0){
+        return;
+    }
+    while (i!=0 && p2->heap[i].priority>p2->heap[(i-1)/2].priority){
+        swap(&(p2->heap[i]), &(p2->heap[(i-1)/2]));
+        i = (i-1)/2;
+    }
+    return;
 }
  
 /*function to insert patient info into the heap*/
 void insert(pq* p2)
 {
     ++top;
-    /* Take Parent info. from terminal and place it in p2->heap at the last position*/
+    /* Take Patient info from terminal and place it in p2->heap at the last position*/
     char name[20],address[100];
     NODE* temp=&(p2->heap[top]);
     printf("Enter patient Name:");
