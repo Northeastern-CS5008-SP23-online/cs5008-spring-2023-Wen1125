@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: <Wenli li>
+// email: <li.wenli@northeastern.edu>
 
 
 #include <stdio.h>
@@ -136,7 +136,7 @@ void enqueue(queue_t* q_p, int d) {
       q_p->head_p = q_p->tail_p; // in queue with 1 node, head and tail point to same ndoe
     } else {
       // queue is not empty
-      n_p = q_p->tail_p;          // get a pointer to the tail fo the queue
+      n_p = q_p->tail_p;          // get a pointer to the tail for the queue
       q_p->tail_p = newNode(d);   // create new node and put it in the tail
       n_p->left_p = q_p->tail_p;  // old tail's left pointer points back to new tail node
       q_p->tail_p->right_p = n_p; // new tail's right pointer points to old tail node
@@ -189,6 +189,14 @@ void freeQueue(queue_t* q_p) {
   return;
 };
 
+// helper funtion 
+bool isContain(int* array, int n) {
+  for (int i=0;i<GSIZE;i++) {
+    if (array[i]==n) {
+      return true;
+    }
+  } return false;
+}
 
   
 int main () {
@@ -211,6 +219,7 @@ int main () {
   queue_t* q = newQueue(); // work queue
   int i;
   int j;
+  int k = 0;
   int current;
   bool done[GSIZE];   // are we done with this node?
 
@@ -226,10 +235,19 @@ int main () {
   enqueue(q,0);
 
   printf("\nBREADTH FIRST TRAFERSAL\n");
+  done[0] = true;
+  printf("NODE: %d\n", 0);
   while (!isEmpty(q)) {
 
     // INSERT YOUR CODE HERE
-    
+    for (j=0;j<GSIZE;j++) {
+      if (E[q->head_p->data][j] && !done[j]) {
+        done[j] = true;
+        printf("NODE: %d\n", j);
+        enqueue(q, j);
+      }
+    }
+    dequeue(q);
   }
 
   // print out nodes that are unreachable
