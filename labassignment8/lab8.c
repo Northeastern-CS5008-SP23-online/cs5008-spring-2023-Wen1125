@@ -1,5 +1,5 @@
-/*Enter your name here*/
-/*Enter your email here*/
+/*Wenli Li*/
+/*li.wenli@northeastern.edu*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,34 +20,69 @@ typedef struct Graph
 /*A function to create a newnode*/
 node* createNode(char* name)
 {
-    
+    node* newNode = (node*)malloc(sizeof(node));
+    strcpy(newNode->name,name);
+    return newNode;
 }
 
 /*A function to create a graph with an array of adjacency lists which is= numberof vertices*/
 Graph* createGraph(int vertices)
 {
-    
+    Graph* graph=(Graph*)malloc(sizeof(Graph));
+    graph->numberOfVertices=vertices;
+    graph->adjLists=(struct node**)malloc(vertices*sizeof(struct node*));
+    int i;
+    for(i=0;i<vertices;i++){
+        graph->adjLists[i]=NULL;
+    }
+    return graph;
 }
 
 /* function to count Number of listspresent in the graph */
 int countNumberofLists(Graph* graph)
 {
-    
+    int i,j=0;//j keeps track of number of lists already present in the graph
+    for(i=0;i<graph->numberOfVertices;i++){
+        if(graph->adjLists[i]!=NULL){
+            j++;
+        }
+    }
+    return j;
 }
 /*searching the persons who are already there in the list*/
 int search(char* name, Graph* graph)
 {
-    
+    int i;//position of person,if not present return -1
+   for(i=0;i<countNumberofLists(graph);i++){
+    if(strcmp(graph->adjLists[i]->name,name)==0){
+        return i;//person is found at the position i
+    }
+   } 
+  return -1;//person is not found
     
 }
 /*adds an edge to an undirected graph*/
 void addConnection(Graph* graph, char* person, char* friend){
     int p = search(person, graph);//search for the person in the graph
     int n=countNumberofLists(graph);
-    
+    node* temp;
     
 /*insert your code here*/
-
+    if (n==0) {
+        graph->adjLists[0] = createNode(person);
+        graph->adjLists[0]->next = createNode(friend);
+    } else {
+        if (p>=0) {
+            temp = graph->adjLists[p];
+            while (temp->next!=NULL) {
+                temp = temp->next;
+            }
+            temp->next = createNode(friend);
+        } else {
+            graph->adjLists[n] = createNode(person);
+            graph->adjLists[n]->next = createNode(friend);
+        }
+    }
 
 
 
