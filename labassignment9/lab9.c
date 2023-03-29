@@ -1,5 +1,5 @@
-// Enter your name here
-//Enter your email here
+// Wenli Li
+//li.wenli@gmail.com
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -86,29 +86,50 @@ void printAdjMatrix(int arr[][MAX],int V)
 int find_indegree(int arr[][MAX], int node,int n)
 {
     int i,in_deg = 0;
-    
-    
+    for(i=1;i<=n;i++){
+        if(arr[i][node]==1){
+            in_deg++;
+        }
+    }
+  return in_deg;  
     
 }
 /*Function to perform topological sorting of the Graph */
 void topologicalOrder(int arr[][MAX], Queue *t, int n)
 {
-    int j=0,delNode,i;
-    int result[MAX],indeg[MAX];
-    
-    
-    
-    
-    //insert your code here
-    
-    
-    
+     int j = 0, delNode, i;
+    int result[MAX], indeg[MAX];
+    for (i = 1; i <= n; i++)
+    {
+        indeg[i] = find_indegree(arr, i, n);
+        if (indeg[i] == 0)
+        {
+            enqueue(t, i);
+        }
+    }
+
+    // insert your code here
+    while (!isEmpty(t->front))
+    {
+        delNode = dequeue(t);
+        result[j++] = delNode;
+        for (i = 1; i <= n; i++)
+        {
+            if (arr[delNode][i] == 1)
+            {
+                indeg[i] -= 1;
+                if (indeg[i] == 0)
+                    enqueue(t, i);
+            }
+        }
+    }
+
     printf("topological ordering\n");
-    for(i=0; i<j;i++)
-        printf("%d\t",result[i]);
+    for (i = 0; i < j; i++)
+        printf("%d\t", result[i]);
     printf("\n");
-    
 }
+
 /*Main Program*/
 int main()
 {
