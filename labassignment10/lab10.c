@@ -1,5 +1,5 @@
-/* Enter your name here*/
-/* Enter your email here*/
+/* Wenli Li*/
+/* li.wenli@northeatern.edu*/
 
 #include<stdio.h>
 #define MAXN 50       /* largest number of books */
@@ -71,10 +71,17 @@ void partition(int s[], int n, int k)
     
     
     /*Insert your code here*/
-    
-  
-    
-    
+    // base case
+    p[0] = 0;
+    for (i=1;i<=n;i++) {
+        p[i] = sum(s, 1, i);
+    }
+    for (i=1;i<=n;i++) {
+        m[i][1] = p[i];
+    }
+    for (i=1;i<=k;i++) {
+        m[1][i] = p[1];
+    }
 /* 2 to k partitions*/
 for (i=2; i<=n; i++)
     
